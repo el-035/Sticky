@@ -1,0 +1,11 @@
+# Sticky — Dependencies
+#
+# PyGObject (gi) is a system package, not available via pip.
+# Install it through your distribution's package manager:
+#
+#   Ubuntu/Debian:  sudo apt install python3-gi gir1.2-gtk-4.0
+#   Fedora:         sudo dnf install python3-gobject gtk4
+#   Arch:           sudo pacman -S python-gobject gtk4
+#
+# No additional pip packages are required.
+# Python 3.8+ standard library is sufficient.

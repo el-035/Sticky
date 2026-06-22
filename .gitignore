@@ -1,0 +1,28 @@
+# Claude Code local/session data
+.claude/
+
+# User-generated note data
+notes/
+
+# Python bytecode cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Packaging / build artifacts
+*.egg-info/
+dist/
+build/
+
+# Test/cache tooling
+.pytest_cache/
+.mypy_cache/
+
+# Editor/OS metadata (optional)
+.DS_Store
+*~
