@@ -3,7 +3,7 @@
 Handles the custom formatting syntax:
   /b ... b/  → bold
   /i ... i/  → italic
-  /t1 ... t1/ through /t4 ... t4/  → titles (scaled font sizes)
+  /t1 ... t1/ through /t3 ... t3/  → titles (scaled font sizes)
   - at line start → bullet list (the "- " prefix is hidden)
 
 Uses invisible TextTags to hide markers while keeping them in the buffer.
@@ -34,11 +34,10 @@ class FormattingEngine:
         ("/t1", "t1/", "t1"),
         ("/t2", "t2/", "t2"),
         ("/t3", "t3/", "t3"),
-        ("/t4", "t4/", "t4"),
     ]
 
     # Tag names that this engine manages
-    STYLE_TAGS = {"b", "i", "t1", "t2", "t3", "t4"}
+    STYLE_TAGS = {"b", "i", "t1", "t2", "t3"}
     HIDDEN_TAGS = {"marker", "bullet"}
     ALL_TAGS = STYLE_TAGS | HIDDEN_TAGS
 
@@ -63,10 +62,9 @@ class FormattingEngine:
 
         # Title tags — scaled font sizes with bold
         title_specs = {
-            "t1": (2.0, Pango.Weight.BOLD),
-            "t2": (1.5, Pango.Weight.BOLD),
-            "t3": (1.25, Pango.Weight.BOLD),
-            "t4": (1.1, Pango.Weight.BOLD),
+            "t1": (1.5, Pango.Weight.BOLD),
+            "t2": (1.25, Pango.Weight.BOLD),
+            "t3": (1.1, Pango.Weight.BOLD),
         }
         for tag_name, (scale, weight) in title_specs.items():
             if tag_table.lookup(tag_name) is None:

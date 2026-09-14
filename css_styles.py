@@ -135,9 +135,11 @@ window.note-window {
 .note-window .toolbar-box button {
     font-family: monospace;
     font-size: 12px;
-    padding: 2px 8px;
-    margin: 0 2px;
-    border-radius: 3px;
+    min-width: 32px;
+    min-height: 28px;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
     background: rgba(0, 0, 0, 0.08);
     border: none;
 }
@@ -164,9 +166,9 @@ window.note-window {
 }
 
 .note-window .color-button {
-    min-width: 24px;
-    min-height: 24px;
-    padding: 2px 8px;
+    min-width: 32px;
+    min-height: 28px;
+    padding: 0;
     font-size: 16px;
 }
 
@@ -214,6 +216,34 @@ window.note-window {
 .color-dropdown .color-option.color-pink > label { color: #b52b7d; background-color: #f0c6e0; }
 .color-dropdown .color-option.color-orange,
 .color-dropdown .color-option.color-orange > label { color: #c45b18; background-color: #f0d0c0; }
+
+.title-button {
+    min-width: 32px;
+    min-height: 28px;
+    padding: 0;
+}
+
+.title-dropdown.popover {
+    background-color: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 10px;
+    padding: 0;
+}
+
+.title-dropdown .title-option {
+    min-width: 42px;
+    min-height: 34px;
+    padding: 0 4px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.title-dropdown .title-option:hover,
+.title-dropdown .title-option:focus {
+    border-color: rgba(0, 0, 0, 0.42);
+    background: rgba(0, 0, 0, 0.09);
+}
 """
 
 # Color definitions for programmatic use

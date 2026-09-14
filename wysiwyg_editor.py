@@ -21,7 +21,7 @@ from formatting import FormattingEngine  # noqa: E402
 class WysiwygEditor(Gtk.TextView):
     """A text editor that renders custom markup as WYSIWYG formatted text.
 
-    Markers like /b, /i, /t1-t4 are hidden and their content styled.
+    Markers like /b, /i, /t1-t3 are hidden and their content styled.
     Bullet lines starting with '- ' have the prefix hidden.
     """
 
@@ -55,7 +55,7 @@ class WysiwygEditor(Gtk.TextView):
         key_controller.connect("key-pressed", self._on_key_pressed)
         self.add_controller(key_controller)
 
-        # Local formatting shortcuts (Ctrl+B, Ctrl+I, Ctrl+1-4)
+        # Local formatting shortcuts (Ctrl+B, Ctrl+I, Ctrl+1-3)
         self._setup_local_shortcuts()
 
         # Callback for external save notification (set by NoteWindow)
@@ -79,8 +79,8 @@ class WysiwygEditor(Gtk.TextView):
         action = Gtk.CallbackAction.new(lambda w, e: self.toggle_italic())
         ctrl.add_shortcut(Gtk.Shortcut.new(trigger=trigger, action=action))
 
-        # Ctrl+1 through Ctrl+4 → titles
-        for level in range(1, 5):
+        # Ctrl+1 through Ctrl+3 → titles
+        for level in range(1, 4):
             trigger = Gtk.ShortcutTrigger.parse_string(f"<Control>{level}")
             lvl = level  # capture for closure
             action = Gtk.CallbackAction.new(lambda w, e, n=lvl: self.apply_title(n))
@@ -148,9 +148,9 @@ class WysiwygEditor(Gtk.TextView):
         """Insert /tN ... tN/ markers around selection or at cursor.
 
         Args:
-            level: Title level 1-4.
+            level: Title level 1-3.
         """
-        if level < 1 or level > 4:
+        if level < 1 or level > 3:
             return
         buffer = self.get_buffer()
         marker = f"/t{level}"

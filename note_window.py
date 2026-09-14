@@ -114,13 +114,13 @@ class NoteWindow(Gtk.Window):
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
 
         # --- Toolbar (simple box instead of HeaderBar) ---
-        toolbar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        toolbar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         toolbar.add_css_class("toolbar-box")
         toolbar.set_margin_start(6)
         toolbar.set_margin_end(6)
         toolbar.set_margin_top(4)
         toolbar.set_margin_bottom(4)
-        toolbar.set_homogeneous(False)
+        toolbar.set_homogeneous(True)
 
         # Bold button
         bold_btn = Gtk.Button(label="B")
@@ -134,18 +134,27 @@ class NoteWindow(Gtk.Window):
         italic_btn.connect("clicked", lambda b: self.editor.toggle_italic())
         toolbar.append(italic_btn)
 
-        # Title dropdown (t1-t4)
+        # Title dropdown (t1-t3)
         title_btn = Gtk.MenuButton()
+        title_btn.add_css_class("title-button")
+        title_btn.set_tooltip_text("Title levels (Ctrl+1 to Ctrl+3)")
         title_btn.set_label("T")
-        title_btn.set_tooltip_text("Title levels (Ctrl+1 to Ctrl+4)")
         title_popover = Gtk.Popover()
-        title_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
-        title_box.set_margin_start(4)
-        title_box.set_margin_end(4)
-        title_box.set_margin_top(4)
-        title_box.set_margin_bottom(4)
-        for level in range(1, 5):
-            btn = Gtk.Button(label=f"T{level}")
+        title_popover.add_css_class("title-dropdown")
+        title_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        title_box.set_margin_start(6)
+        title_box.set_margin_end(6)
+        title_box.set_margin_top(6)
+        title_box.set_margin_bottom(6)
+        title_sizes = {1: 15000, 2: 12500, 3: 11000}
+        for level in range(1, 4):
+            btn = Gtk.Button()
+            btn.add_css_class("title-option")
+            title_label = Gtk.Label()
+            title_label.set_markup(
+                f'<span font_weight="bold" size="{title_sizes[level]}">Title</span>'
+            )
+            btn.set_child(title_label)
             btn.set_tooltip_text(f"Title level {level}")
             lvl = level
             btn.connect("clicked", lambda b, n=lvl: self._on_title_selected(n, title_popover))

@@ -61,7 +61,7 @@ class NoteModel:
     def visible_first_line(self) -> str:
         """Return the first line with formatting markers stripped out.
 
-        Removes /b, b/, /i, i/, /t1-t4, t1/-t4/, and bullet '- ' prefixes.
+        Removes /b, b/, /i, i/, /t1-t3, t1/-t3/, and bullet '- ' prefixes.
         """
         import re
 
@@ -69,7 +69,7 @@ class NoteModel:
         if not text:
             return ""
 
-        # Remove formatting markers: /b, b/, /i, i/, /t1-t4, t1/-t4/
+        # Remove formatting markers: /b, b/, /i, i/, /t1-t3, t1/-t3/
         text = re.sub(r'/([bit][1-4]?)', '', text)
         text = re.sub(r'([bit][1-4]?)/', '', text)
 

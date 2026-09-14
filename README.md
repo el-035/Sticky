@@ -57,10 +57,9 @@ Sticky uses simple inline markers. As you type, text renders styled instantly â€
 |----------|---------|
 | `/b important b/` | **important** (bold) |
 | `/i subtle i/` | *subtle* (italic) |
-| `/t1 Big Title t1/` | **Big Title** (largest heading) |
-| `/t2 Heading t2/` | **Heading** (large) |
-| `/t3 Heading t3/` | **Heading** (medium) |
-| `/t4 Heading t4/` | **Heading** (small heading) |
+| `/t1 Heading t1/` | **Heading** (large) |
+| `/t2 Heading t2/` | **Heading** (medium) |
+| `/t3 Heading t3/` | **Heading** (small heading) |
 
 
 ### Making Lists
@@ -106,7 +105,6 @@ All notes are stored as JSON files in the `notes/` folder next to the app. To ba
 | `Ctrl+1` | Title level 1 |
 | `Ctrl+2` | Title level 2 |
 | `Ctrl+3` | Title level 3 |
-| `Ctrl+4` | Title level 4 |
 | `Ctrl+W` | Close the focused note window |
 | `Ctrl+Alt+N` | Create and open a new note while Sticky is running |
 | `Ctrl+Plus` | Enlarge note |

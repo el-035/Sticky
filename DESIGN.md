@@ -60,11 +60,10 @@ Markers act as toggles — text renders styled between the open and close marker
 | `/b ... b/` | Bold | `/b hello b/` | **hello** |
 | `/i ... i/` | Italic | `/i hello i/` | *hello* |
 | `/t1 ... t1/` | Title level 1 (largest) | `/t1 Heading t1/` | **Heading** (large font) |
-| `/t2 ... t2/` | Title level 2 | `/t2 Heading t2/` | **Heading** (medium-large font) |
-| `/t3 ... t3/` | Title level 3 | `/t3 Heading t3/` | **Heading** (medium font) |
-| `/t4 ... t4/` | Title level 4 (smallest title) | `/t4 Heading t4/` | **Heading** (slightly larger than body) |
+| `/t2 ... t2/` | Title level 2 | `/t2 Heading t2/` | **Heading** (medium font) |
+| `/t3 ... t3/` | Title level 3 (smallest title) | `/t3 Heading t3/` | **Heading** (slightly larger than body) |
 
-All title levels render in a font size larger than normal body text. `/t1` is the largest, `/t4` is the smallest title.
+All title levels render in a font size larger than normal body text. `/t1` is the largest, `/t3` is the smallest title.
 
 ### Bullet Lists
 
@@ -85,7 +84,7 @@ Each note window has a toolbar with:
 |-------------|--------|
 | **Bold** | Toggle `/b` formatting (also `Ctrl+B`) |
 | **Italic** | Toggle `/i` formatting (also `Ctrl+I`) |
-| **Title dropdown** | Select `/t1` through `/t4` (also `Ctrl+1` to `Ctrl+4`) |
+| **Title dropdown** | Select `/t1` through `/t3` (also `Ctrl+1` to `Ctrl+3`) |
 | **Color picker** | Dropdown with 5 pastel color options |
 
 The note window is closed with the window titlebar's close button or `Ctrl+W`.
@@ -103,7 +102,6 @@ All toolbar actions also have keyboard alternatives.
 | `Ctrl+1` | Apply `/t1` title |
 | `Ctrl+2` | Apply `/t2` title |
 | `Ctrl+3` | Apply `/t3` title |
-| `Ctrl+4` | Apply `/t4` title |
 | `Ctrl+Plus` | Increase note size by a percentage increment |
 | `Ctrl+W` | Close the focused note window |
 | `Ctrl+Alt+N` | Create and open a new note while Sticky is running |
