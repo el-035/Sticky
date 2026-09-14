@@ -205,6 +205,9 @@ class NoteWindow(Gtk.Window):
         self.title_entry.set_margin_bottom(2)
         self.title_entry.set_text(self.note_model.title)
         self.title_entry.connect("changed", self._on_title_changed)
+        title_key_controller = Gtk.EventControllerKey.new()
+        title_key_controller.connect("key-pressed", self._on_title_key_pressed)
+        self.title_entry.add_controller(title_key_controller)
         main_box.append(self.title_entry)
 
         # --- Editor in ScrolledWindow ---
@@ -313,6 +316,13 @@ class NoteWindow(Gtk.Window):
         """Save the note content to disk immediately."""
         self.note_model.content = self.editor.get_markup_content()
         self.app.note_store.save(self.note_model)
+
+    def _on_title_key_pressed(self, controller, keyval, keycode, state):
+        """Move focus from the title field to the note body on Tab."""
+        if keyval == Gdk.KEY_Tab:
+            self.editor.grab_focus()
+            return True
+        return False
 
     def _on_title_changed(self, entry):
         """Update the note title on every keystroke and save."""
