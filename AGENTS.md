@@ -1,6 +1,6 @@
 # Sticky — Post-It Note App for Linux
 
-A Linux desktop sticky-note application built with GTK 4 + Python. Notes are stored as JSON files in a single folder. Features a modern dark gray manager window and pastel-colored floating note windows with custom inline formatting markup.
+A Linux desktop sticky-note application built with GTK 4 + Python. Notes are stored as JSON files in a single folder. Features a compact post-it style manager list with a yellow background and pastel-colored floating note windows with custom inline formatting markup.
 
 ## Key Design Decisions
 
@@ -13,6 +13,7 @@ A Linux desktop sticky-note application built with GTK 4 + Python. Notes are sto
 - WYSIWYG formatting markers hidden, text styled immediately
 - Local shortcut Ctrl+Alt+N creates a new note while Sticky is running
 - Local shortcut Ctrl+W closes a focused note window
+- Local shortcut Ctrl+Q quits Sticky
 - Always-on-top is handled by the window manager (right-click titlebar → Always on Top); no in-app pin button
 - App quits when the last window is closed (manager or note)
 - Notes always reopen at default post-it square size
@@ -33,6 +34,7 @@ postit/
 ├── wysiwyg_editor.py  # GTK text editor
 ├── formatting.py      # Inline formatting engine
 ├── css_styles.py      # GTK CSS definitions
+├── sticky.svg         # Application icon (generated with ChatGPT)
 ├── notes/             # Directory where note JSON files are stored
 │   ├── 20260619-143022.json
 │   └── ...

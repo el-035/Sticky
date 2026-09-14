@@ -1,6 +1,6 @@
 """ManagerWindow — the main note list view.
 
-Retro terminal aesthetic: black background, green text, monospace font.
+Compact post-it style manager list.
 Shows all notes in a Gtk.ListView with first-line preview, color indicator,
 and a delete button per row. Has a "+" button.
 """
@@ -52,15 +52,15 @@ class ManagerWindow(Gtk.ApplicationWindow):
         super().__init__(
             application=app,
             title="Sticky",
-            default_width=380,
-            default_height=500,
+            default_width=420,
+            default_height=560,
         )
 
         # Per-widget bound data storage. PyGObject on some systems does not
         # support GObject.set_data(), so we keep our own maps keyed by widget.
         self._widget_note_ids: dict[int, str] = {}
 
-        # Apply retro terminal CSS
+        # Apply post-it manager CSS
         self.add_css_class("manager")
         self._apply_css()
 
@@ -88,31 +88,6 @@ class ManagerWindow(Gtk.ApplicationWindow):
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.set_child(vbox)
 
-        # --- Header bar with + button ---
-        header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        header.set_margin_start(12)
-        header.set_margin_end(12)
-        header.set_margin_top(10)
-        header.set_margin_bottom(10)
-
-        title_label = Gtk.Label(label="Sticky")
-        title_label.set_halign(Gtk.Align.START)
-        title_label.set_hexpand(True)
-        title_label.add_css_class("title-label")
-
-        add_button = Gtk.Button(label="+")
-        add_button.add_css_class("add-button")
-        add_button.set_tooltip_text("New note (Ctrl+Alt+N)")
-        add_button.connect("clicked", self._on_add_clicked)
-
-        header.append(title_label)
-        header.append(add_button)
-        vbox.append(header)
-
-        # --- Separator ---
-        separator = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
-        vbox.append(separator)
-
         # --- Scrolled list view ---
         scrolled = Gtk.ScrolledWindow()
         scrolled.set_vexpand(True)
@@ -136,16 +111,29 @@ class ManagerWindow(Gtk.ApplicationWindow):
         scrolled.set_child(self.list_view)
         vbox.append(scrolled)
 
+        # --- Bottom-right new-note button ---
+        footer = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        footer.set_halign(Gtk.Align.END)
+        footer.set_margin_end(12)
+        footer.set_margin_top(8)
+        footer.set_margin_bottom(12)
+        add_button = Gtk.Button(label="+")
+        add_button.add_css_class("add-button")
+        add_button.set_tooltip_text("New note (Ctrl+Alt+N)")
+        add_button.connect("clicked", self._on_add_clicked)
+        footer.append(add_button)
+        vbox.append(footer)
+
         # --- Close-request: destroy manager, let GTK quit when last window closes ---
         self.connect("close-request", self._on_close_request)
 
     def _on_list_item_setup(self, factory, list_item):
         """Create the row widget structure (called once per row template)."""
         row_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        row_box.set_margin_start(8)
-        row_box.set_margin_end(8)
-        row_box.set_margin_top(4)
-        row_box.set_margin_bottom(4)
+        row_box.set_margin_start(16)
+        row_box.set_margin_end(16)
+        row_box.set_margin_top(5)
+        row_box.set_margin_bottom(5)
 
         # Whole-row click opens the note. The row_box gesture sees clicks on
         # empty space and on non-target children; the delete button consumes
@@ -335,11 +323,10 @@ class ManagerWindow(Gtk.ApplicationWindow):
                 break
 
     def refresh_note_in_list(self, note: NoteModel):
-        """Update an existing note row's display title in the list.
+        """Refresh an existing note row after note metadata changes.
 
         Gio.ListStore does not notify views about in-place item changes,
-        so we remove the old row and insert a fresh NoteRow bound to the
-        same index. This forces the ListView to rebind and show the new title.
+        so we replace the row when its title, color, or lock state changes.
         """
         note_id = note.id
         for i in range(self.list_store.get_n_items()):
@@ -347,8 +334,11 @@ class ManagerWindow(Gtk.ApplicationWindow):
             if item is None or item.note_id != note_id:
                 continue
 
-            new_title = note.display_title
-            if item.display_title != new_title:
+            if (
+                item.display_title != note.display_title
+                or item.color != note.color
+                or item.locked != note.locked
+            ):
                 self.list_store.remove(i)
                 self.list_store.insert(i, NoteRow.from_note(note))
             break

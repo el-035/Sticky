@@ -2,7 +2,7 @@
 Name=Sticky
 Comment=A simple sticky-note app for your desktop
 Exec=python3 sticky.py
-Icon=accessories-text-editor
+Icon=sticky.svg
 Terminal=false
 Type=Application
 Categories=Utility;Office;

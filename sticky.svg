@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Sticky note icon</title>
+  <desc id="desc">A simple purple sticky note with the word Sticky.</desc>
+
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#4C1D95" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Rounded sticky note with a folded lower-right corner -->
+  <path
+    d="M48 28h160c11 0 20 9 20 20v117l-44 63H48c-11 0-20-9-20-20V48c0-11 9-20 20-20Z"
+    fill="#A855F7"
+    filter="url(#shadow)"
+  />
+  <path d="M228 165h-38c-11 0-20 9-20 20v43Z" fill="#7E22CE" opacity="0.72"/>
+  <path d="M190 165h38l-38 63Z" fill="#D8B4FE" opacity="0.8"/>
+
+  <!-- Small accent line -->
+  <path d="M57 72h54" fill="none" stroke="#E9D5FF" stroke-linecap="round" stroke-width="7" opacity="0.8"/>
+
+  <!-- Handwritten-style note lines -->
+  <g fill="none" stroke="#F5EAFE" stroke-linecap="round">
+    <path d="M59 106c27-2 57 1 91-1" stroke-width="7" opacity="0.95"/>
+    <path d="M59 130c39 1 79-2 125 0" stroke-width="7" opacity="0.9"/>
+    <path d="M59 154c26 2 53-1 83 0" stroke-width="7" opacity="0.85"/>
+    <path d="M59 178c35-1 65 1 108-1" stroke-width="7" opacity="0.78"/>
+  </g>
+</svg>

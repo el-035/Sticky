@@ -1,92 +1,147 @@
 """CSS provider strings for Sticky's visual styling.
 
 Provides CSS for:
-- Manager window (modern dark gray with white text, matching the note aesthetic)
+- Manager window (minimal flat list with subtle blue accents)
 - Note windows (5 pastel color variants)
 - General widget styling
 """
 
-# CSS for the manager window — modern dark gray look with white text
+# CSS for the manager window — original compact post-it list style
 MANAGER_CSS = """
 window.manager {
-    background-color: #2e2e2e;
-    color: #f0f0f0;
+    background-color: #fff9d9;
+    color: #3d3824;
     font-family: monospace;
+    border-radius: 4px;
 }
 
+.manager > box {
+    background-color: #fff9d9;
+    border-radius: 4px;
+}
+
+.manager scrolledwindow,
 .manager listview {
-    background-color: #2e2e2e;
-    color: #f0f0f0;
+    background-color: #fff9d9;
+    padding: 0;
 }
 
 .manager listview row {
-    padding: 8px 12px;
-    border-bottom: 1px solid #404040;
-    transition: background-color 150ms;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(61, 56, 36, 0.18);
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .manager listview row:hover {
-    background-color: #3d3d3d;
+    background-color: rgba(255, 255, 255, 0.22);
 }
 
 .manager listview row:selected {
-    background-color: #505050;
+    background-color: rgba(190, 157, 35, 0.20);
+    box-shadow: inset 3px 0 #8f7618;
 }
 
 .manager .title-label {
     font-size: 14px;
-    color: #f0f0f0;
+    color: #3d3824;
     font-weight: bold;
 }
 
 .manager .date-label {
     font-size: 12px;
-    color: #a0a0a0;
+    color: #756b43;
 }
 
 .manager .lock-button {
-    background: none;
+    background: transparent;
     border: none;
-    color: #a0a0a0;
+    color: #9a916f;
     font-size: 14px;
     padding: 2px 6px;
     border-radius: 4px;
 }
 
 .manager .lock-button:hover {
-    color: #f0f0f0;
-    background-color: #404040;
+    color: #504a2c;
+    background: rgba(190, 157, 35, 0.28);
 }
 
 .manager .lock-button.is-locked {
-    color: #f0c674;
+    color: #242012;
 }
 
-.manager .delete-button {
-    background: none;
+.manager button.delete-button,
+.manager button.delete-button > label {
+    background: transparent;
     border: none;
-    color: #ff7777;
-    font-size: 16px;
-    padding: 2px 8px;
-    border-radius: 4px;
+    color: #b84b4b;
+    font-size: 14px;
+    padding: 1px 5px;
+    border-radius: 3px;
 }
 
-.manager .delete-button:hover {
-    color: #ff9999;
-    background-color: #4a2a2a;
+.manager button.delete-button:hover,
+.manager button.delete-button:focus,
+.manager button.delete-button:focus-visible {
+    color: #8e3030;
+    background: rgba(184, 75, 75, 0.12);
+    outline: 1px solid rgba(142, 48, 48, 0.30);
+    outline-offset: 0;
 }
 
-.manager .add-button {
-    background: none;
-    border: 1px solid #f0f0f0;
-    color: #f0f0f0;
-    font-size: 18px;
-    padding: 4px 16px;
-    border-radius: 4px;
+.manager button.delete-button:hover > label,
+.manager button.delete-button:focus > label,
+.manager button.delete-button:focus-visible > label {
+    color: #8e3030;
 }
 
-.manager .add-button:hover {
-    background-color: #4a4a4a;
+.manager button.delete-button:active {
+    color: #722323;
+    background: rgba(184, 75, 75, 0.20);
+}
+
+.manager button.delete-button:active > label {
+    color: #722323;
+}
+
+.manager button.add-button,
+.manager button.add-button > label {
+    min-width: 40px;
+    min-height: 40px;
+    background: #35a854;
+    color: #fffbe0;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0;
+    border-radius: 999px;
+}
+
+.manager button.add-button:hover,
+.manager button.add-button:focus,
+.manager button.add-button:focus-visible {
+    background: #2d9149;
+    color: #ffffff;
+    outline: 2px solid rgba(53, 168, 84, 0.35);
+    outline-offset: 2px;
+}
+
+.manager button.add-button:hover > label,
+.manager button.add-button:focus > label,
+.manager button.add-button:focus-visible > label {
+    color: #ffffff;
+}
+
+.manager button.add-button:active {
+    background: #24763b;
+    color: #ffffff;
+}
+
+.manager button.add-button:active > label {
+    color: #ffffff;
 }
 
 .manager .color-dot {
@@ -97,6 +152,7 @@ window.manager {
 }
 """
 
+
 # CSS for note windows — 5 pastel color variants
 NOTE_CSS = """
 window.note-window {
@@ -104,10 +160,14 @@ window.note-window {
     border-radius: 4px;
 }
 
+.note-window > box {
+    border-radius: 4px;
+}
+
 .note-yellow,
 .note-yellow .toolbar-box,
 .note-yellow textview {
-    background-color: #fdf6c6;
+    background-color: #fff9d9;
 }
 
 .note-green,
@@ -225,7 +285,7 @@ window.note-window {
 }
 
 .color-dropdown .color-option.color-yellow,
-.color-dropdown .color-option.color-yellow > label { color: #c29400; background-color: #fdf6c6; }
+.color-dropdown .color-option.color-yellow > label { color: #c29400; background-color: #fff9d9; }
 .color-dropdown .color-option.color-green,
 .color-dropdown .color-option.color-green > label { color: #168a3a; background-color: #c6f0c6; }
 .color-dropdown .color-option.color-blue,
@@ -266,7 +326,7 @@ window.note-window {
 
 # Color definitions for programmatic use
 PASTEL_COLORS = {
-    "yellow": {"name": "Yellow", "css_class": "note-yellow", "hex": "#fdf6c6"},
+    "yellow": {"name": "Yellow", "css_class": "note-yellow", "hex": "#fff9d9"},
     "green": {"name": "Green", "css_class": "note-green", "hex": "#c6f0c6"},
     "blue": {"name": "Blue", "css_class": "note-blue", "hex": "#c6dff0"},
     "pink": {"name": "Pink", "css_class": "note-pink", "hex": "#f0c6e0"},

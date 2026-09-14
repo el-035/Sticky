@@ -311,6 +311,8 @@ class NoteWindow(Gtk.Window):
         self._set_color_class(color)
         self._set_color_button_color(color)
         self._auto_save()
+        if self.app.manager_window is not None:
+            self.app.manager_window.refresh_note_in_list(self.note_model)
 
     def _auto_save(self):
         """Save the note content to disk immediately."""

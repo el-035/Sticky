@@ -41,7 +41,7 @@ Pin Sticky to your dock/sidebar for quick access.
 
 | Action | How |
 |--------|-----|
-| **New note from manager** | Click the **+** button in the manager window |
+| **New note from manager** | Click the green **+** button in the bottom-right corner of the manager window |
 
 ### Managing Notes
 
@@ -115,8 +115,13 @@ All notes are stored as JSON files in the `notes/` folder next to the app. To ba
 | `Ctrl+2` | Title level 2 |
 | `Ctrl+3` | Title level 3 |
 | `Ctrl+W` | Close the focused note window |
+| `Ctrl+Q` | Quit Sticky |
 | `Ctrl+Alt+N` | Create and open a new note while Sticky is running |
 | `Ctrl+Plus` | Enlarge note |
+
+## App Icon
+
+The bundled `sticky.svg` application icon was generated with ChatGPT.
 
 ## Data & Privacy
 

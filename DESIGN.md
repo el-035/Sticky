@@ -6,7 +6,7 @@
 
 ## Core Behavior
 
-- **Manager window**: List view of all notes with a dark gray background, white text, and a monospace font.
+- **Manager window**: Compact list of all notes on the same yellow post-it background used by default notes, with dark monospace text.
 - **Floating notes**: Each note opens as an independent window with a pastel-colored background covering the whole window (toolbar + editor). Monospace font.
 - **App lifecycle**: The app runs while at least one window (manager or note) is open, and exits when the last window closes. Closing the manager window closes only the manager; any open note windows remain available.
 - **Desktop launcher**: The installer adds a Sticky launcher to the user application menu. Pinning it to a dock or sidebar is a desktop environment setting.
@@ -107,19 +107,20 @@ All toolbar actions also have keyboard alternatives.
 | `Ctrl+3` | Apply `/t3` title |
 | `Ctrl+Plus` | Increase note size by a percentage increment |
 | `Ctrl+W` | Close the focused note window |
+| `Ctrl+Q` | Quit Sticky |
 | `Ctrl+Alt+N` | Create and open a new note while Sticky is running |
 | `Ctrl+drag` | Resize the note window with the mouse |
 
 ## Manager Window (List View)
 
-- **Appearance**: Dark gray background, white text, monospace font.
+- **Appearance**: Yellow post-it background, compact flat rows, dark monospace text, and simple controls.
 - **Layout**: Vertical list of all notes.
 - **Each list item shows**:
   - Explicit title if set; otherwise the first line of note content; otherwise the creation date + time (e.g., "2026-06-19 14:30:22")
   - Color indicator (small colored dot in the note's color)
   - Open/closed lock icon to toggle deletion protection
   - Delete icon (✕) on the right side — **instant deletion for unlocked notes, no confirmation**
-- **"+" button**: Creates a new note (also `Ctrl+Alt+N` while Sticky is running)
+- **Green "+" button**: Creates a new note from the bottom-right corner (also `Ctrl+Alt+N` while Sticky is running)
 - **Window close / X**: Closes the manager window. The application exits after all note windows are closed as well.
 - **Click on a row**: Opens the note as a floating window. If already open, brings the existing window to the front (no duplicates).
 - **Search/filter/sort**: Not in v1 (future feature).
@@ -147,6 +148,10 @@ All toolbar actions also have keyboard alternatives.
 - Numbered lists
 - Dark/light mode toggle
 - Note size/position memory across sessions
+
+## App Icon
+
+The bundled `sticky.svg` application icon was generated with ChatGPT.
 
 ## Technical Stack
 

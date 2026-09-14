@@ -37,7 +37,7 @@ echo "3. Installing desktop launcher..."
 mkdir -p "$LOCAL_APPS_DIR"
 
 # Update the desktop file with the correct path
-sed "s|Exec=.*|Exec=python3 $SCRIPT_DIR/sticky.py|" "$DESKTOP_FILE" > "$LOCAL_DESKTOP"
+sed -e "s|Exec=.*|Exec=python3 $SCRIPT_DIR/sticky.py|" -e "s|Icon=.*|Icon=$SCRIPT_DIR/sticky.svg|" "$DESKTOP_FILE" > "$LOCAL_DESKTOP"
 chmod +x "$LOCAL_DESKTOP"
 
 echo "   Desktop launcher installed to:"
