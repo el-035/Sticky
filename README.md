@@ -71,7 +71,15 @@ Type `-` at the start of a line to begin a bullet list:
 - Eggs
 ```
 
-Press **Enter** at the end of a line — a new `-` appears automatically. To exit the list, delete the `-` on an empty bullet line.
+Press **Enter** at the end of a line — a new bullet appears automatically at the same indentation. Press **Tab** on a bullet line to indent it by four spaces. On an empty indented bullet, press **Backspace** to remove one indentation level. At the top level, press **Backspace** again to remove the bullet.
+
+Nested lists use four spaces per indentation level:
+```text
+- This is a list
+- Here is another item
+    - This item is nested
+    - The next item stays nested
+```
 
 ### Changing Note Color
 

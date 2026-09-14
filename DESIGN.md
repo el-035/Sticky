@@ -68,8 +68,9 @@ All title levels render in a font size larger than normal body text. `/t1` is th
 ### Bullet Lists
 
 - Typing `- ` (dash followed by a space) at the start of a line begins a bullet list. The `- ` marker stays visible (Markdown-style editing).
-- Pressing Enter (newline) automatically inserts `- ` on the next line and places the cursor after it, continuing the list.
-- Pressing Backspace on an empty bullet line (`- ` with no content) removes the bullet prefix and exits list mode.
+- Pressing Enter (newline) automatically inserts a bullet on the next line at the same indentation level.
+- Pressing Tab on a bullet line indents it by four spaces; nested bullets continue at that indentation.
+- Pressing Backspace on an empty indented bullet removes one four-space indentation level. At the top level, it removes the bullet prefix and exits list mode.
 - Numbered lists are not supported (future feature).
 
 ### WYSIWYG Behavior

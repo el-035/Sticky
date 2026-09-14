@@ -208,7 +208,7 @@ class FormattingEngine:
         A bullet line is one that starts with '- ' (dash + space).
         The '- ' prefix gets the 'bullet' tag (invisible).
         """
-        for match in re.finditer(r"^- ", text, re.MULTILINE):
+        for match in re.finditer(r"^[ ]*- ", text, re.MULTILINE):
             bullet_start = match.start(0)
             bullet_end = match.end(0)  # covers "- "
             self._apply_tag_at_offset(
@@ -349,7 +349,7 @@ class FormattingEngine:
             True if the line containing the cursor starts with '- '.
         """
         line_text = self._line_text_at_cursor(buffer)
-        return line_text.startswith("- ")
+        return bool(re.match(r"^[ ]*- ", line_text))
 
     def is_empty_bullet_line(self, buffer: Gtk.TextBuffer) -> bool:
         """Check if the current line is an empty bullet (just '- ').
@@ -373,9 +373,41 @@ class FormattingEngine:
             buffer: The TextBuffer.
         """
         cursor_iter = buffer.get_iter_at_mark(buffer.get_insert())
-        # Insert newline + bullet prefix. Gtk moves the insert mark to the end
-        # of the inserted text, i.e. right after '- '.
-        buffer.insert(cursor_iter, "\n- ")
+        indent = self.bullet_indentation(buffer)
+        # Insert a newline plus the same indentation and bullet prefix.
+        buffer.insert(cursor_iter, f"\n{indent}- ")
+
+    def bullet_indentation(self, buffer: Gtk.TextBuffer) -> str:
+        """Return the spaces before the current line's bullet marker."""
+        line_text = self._line_text_at_cursor(buffer)
+        match = re.match(r"^( *)- ", line_text)
+        return match.group(1) if match else ""
+
+    def indent_bullet(self, buffer: Gtk.TextBuffer, spaces: int = 4) -> bool:
+        """Indent the current bullet line by the requested number of spaces."""
+        if not self.is_bullet_line(buffer):
+            return False
+        cursor_iter = buffer.get_iter_at_mark(buffer.get_insert())
+        line_start = cursor_iter.copy()
+        line_start.set_line_offset(0)
+        buffer.insert(line_start, " " * spaces)
+        return True
+
+    def outdent_empty_bullet(self, buffer: Gtk.TextBuffer, spaces: int = 4) -> bool:
+        """Remove one indentation level from an empty nested bullet."""
+        if not self.is_empty_bullet_line(buffer):
+            return False
+        indent = self.bullet_indentation(buffer)
+        if len(indent) < spaces:
+            return False
+
+        cursor_iter = buffer.get_iter_at_mark(buffer.get_insert())
+        line_start = cursor_iter.copy()
+        line_start.set_line_offset(0)
+        line_end = line_start.copy()
+        line_end.forward_chars(spaces)
+        buffer.delete(line_start, line_end)
+        return True
 
     def delete_empty_bullet(self, buffer: Gtk.TextBuffer) -> bool:
         """If the current line is an empty bullet, delete it entirely.

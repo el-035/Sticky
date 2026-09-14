@@ -110,8 +110,9 @@ class WysiwygEditor(Gtk.TextView):
     def _on_key_pressed(self, controller, keyval, keycode, state):
         """Handle special keys for bullet list behavior.
 
-        Enter on a bullet line → create a new bullet line and place cursor after '- '.
-        BackSpace on an empty bullet line → delete the entire bullet prefix.
+        Enter on a bullet line → continue at the same indentation level.
+        Tab on a bullet line → indent it by four spaces.
+        BackSpace on an empty nested bullet → outdent one level; at the top level, delete the bullet prefix.
         """
         buffer = self.get_buffer()
 
@@ -122,7 +123,16 @@ class WysiwygEditor(Gtk.TextView):
                 self.engine.scan_around_cursor(buffer)
                 return True  # We handled Enter; do not run the default handler
 
+        elif keyval == Gdk.KEY_Tab or keyval == Gdk.KEY_ISO_Left_Tab:
+            if self.engine.indent_bullet(buffer, spaces=4):
+                self.engine.scan_around_cursor(buffer)
+                return True  # We handled Tab
+
         elif keyval == Gdk.KEY_BackSpace:
+            # Outdent an empty nested bullet before deleting a top-level bullet.
+            if self.engine.outdent_empty_bullet(buffer, spaces=4):
+                self.engine.scan_around_cursor(buffer)
+                return True  # We handled BackSpace as an outdent
             # Check if current line is an empty bullet
             if self.engine.delete_empty_bullet(buffer):
                 self.engine.scan_around_cursor(buffer)

@@ -8,7 +8,7 @@ A Linux desktop sticky-note application built with GTK 4 + Python. Notes are sto
 - One JSON file per note, instant auto-save on every keystroke
 - Notes have an optional dedicated **title** field shown at the top of each note and in the manager list
 - Custom formatting syntax: `/b bold b/`, `/i italic i/`, `/t1`–`/t3` for titles
-- Bullet lists via `- ` (dash + space) at line start, auto-continues on Enter; `- ` marker stays visible (Markdown-style)
+- Bullet lists via `- ` (dash + space) at line start, auto-continue on Enter, and four-space indentation with Tab, and Backspace outdents empty nested bullets; `- ` marker stays visible (Markdown-style)
 - 5 pastel colors color the entire note window: yellow (default), green, blue, pink/purple, orange/red
 - WYSIWYG formatting markers hidden, text styled immediately
 - Local shortcut Ctrl+Alt+N creates a new note while Sticky is running
