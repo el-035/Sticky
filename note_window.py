@@ -53,6 +53,7 @@ class NoteWindow(Gtk.Window):
 
         # Build UI
         self._build_ui()
+        self._set_color_button_color(note.color)
 
         # Load content into editor
         self.editor.set_markup_content(note.content)
@@ -93,6 +94,19 @@ class NoteWindow(Gtk.Window):
             self.remove_css_class(color_info["css_class"])
         color_info = PASTEL_COLORS.get(color, PASTEL_COLORS[DEFAULT_COLOR])
         self.add_css_class(color_info["css_class"])
+
+    def _set_color_button_color(self, color: str):
+        """Show the selected note color as a swatch in the toolbar."""
+        if not hasattr(self, "color_button"):
+            return
+        for color_name in PASTEL_COLORS:
+            self.color_button.remove_css_class(f"color-{color_name}")
+        selected = color if color in PASTEL_COLORS else DEFAULT_COLOR
+        self.color_button.add_css_class(f"color-{selected}")
+        color_info = PASTEL_COLORS[selected]
+        self.color_button_label.set_markup(
+            f'<span foreground="{color_info["hex"]}">●</span>'
+        )
 
     def _build_ui(self):
         """Construct the note window layout."""
@@ -142,18 +156,26 @@ class NoteWindow(Gtk.Window):
 
         # Color picker dropdown
         color_btn = Gtk.MenuButton()
-        color_btn.set_label("◉")
+        color_btn.add_css_class("color-button")
+        self.color_button = color_btn
+        self.color_button_label = Gtk.Label()
+        color_btn.set_child(self.color_button_label)
         color_btn.set_tooltip_text("Note color")
         color_btn.add_css_class("color-dropdown")
         color_popover = Gtk.Popover()
         color_popover.add_css_class("color-dropdown")
-        color_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
-        color_box.set_margin_start(4)
-        color_box.set_margin_end(4)
-        color_box.set_margin_top(4)
-        color_box.set_margin_bottom(4)
+        color_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        color_box.set_margin_start(6)
+        color_box.set_margin_end(6)
+        color_box.set_margin_top(6)
+        color_box.set_margin_bottom(6)
         for color_name, color_info in PASTEL_COLORS.items():
-            btn = Gtk.Button(label=color_info["name"])
+            btn = Gtk.Button()
+            swatch = Gtk.Label()
+            swatch.set_markup(f'<span foreground="{color_info["hex"]}">●</span>')
+            btn.set_child(swatch)
+            btn.add_css_class("color-option")
+            btn.add_css_class(f"color-{color_name}")
             btn.set_tooltip_text(f"Set note color to {color_info['name']}")
             cname = color_name
             btn.connect("clicked", lambda b, c=cname: self._on_color_selected(c, color_popover))
@@ -275,6 +297,7 @@ class NoteWindow(Gtk.Window):
         popover.popdown()
         self.note_model.color = color
         self._set_color_class(color)
+        self._set_color_button_color(color)
         self._auto_save()
 
     def _auto_save(self):

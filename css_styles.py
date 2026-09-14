@@ -163,29 +163,57 @@ window.note-window {
     border-bottom: 1px solid rgba(0, 0, 0, 0.35);
 }
 
-.color-dropdown button {
-    font-family: monospace;
-    font-size: 12px;
+.note-window .color-button {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 2px 8px;
+    font-size: 16px;
 }
 
-.color-dropdown popover {
-    font-family: monospace;
-    background-color: #fafafa;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 4px;
+.note-window .color-button.color-yellow,
+.note-window .color-button.color-yellow > label { color: #c29400; }
+.note-window .color-button.color-green,
+.note-window .color-button.color-green > label { color: #168a3a; }
+.note-window .color-button.color-blue,
+.note-window .color-button.color-blue > label { color: #1769aa; }
+.note-window .color-button.color-pink,
+.note-window .color-button.color-pink > label { color: #b52b7d; }
+.note-window .color-button.color-orange,
+.note-window .color-button.color-orange > label { color: #c45b18; }
+
+.color-dropdown.popover {
+    background-color: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 10px;
+    padding: 0;
 }
 
-.color-dropdown popover button {
-    padding: 4px 12px;
-    border-radius: 3px;
-    border: none;
-    margin: 2px;
+.color-dropdown .color-option {
+    min-width: 28px;
+    min-height: 28px;
+    padding: 0;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    font-size: 16px;
+    background: transparent;
 }
 
-.color-dropdown popover button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.color-dropdown .color-option:hover,
+.color-dropdown .color-option:focus {
+    border-color: rgba(0, 0, 0, 0.48);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
+
+.color-dropdown .color-option.color-yellow,
+.color-dropdown .color-option.color-yellow > label { color: #c29400; background-color: #fdf6c6; }
+.color-dropdown .color-option.color-green,
+.color-dropdown .color-option.color-green > label { color: #168a3a; background-color: #c6f0c6; }
+.color-dropdown .color-option.color-blue,
+.color-dropdown .color-option.color-blue > label { color: #1769aa; background-color: #c6dff0; }
+.color-dropdown .color-option.color-pink,
+.color-dropdown .color-option.color-pink > label { color: #b52b7d; background-color: #f0c6e0; }
+.color-dropdown .color-option.color-orange,
+.color-dropdown .color-option.color-orange > label { color: #c45b18; background-color: #f0d0c0; }
 """
 
 # Color definitions for programmatic use
