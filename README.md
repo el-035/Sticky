@@ -1,13 +1,6 @@
 # Sticky
 
-A simple, lightweight sticky-note app for Linux. Jot things down, keep them visible, never lose a thought.
-
-![Sticky](placeholder-for-screenshot.png)
-
-## How It Looks
-
-- **Manager window**: Retro terminal style — black background, green text. Lists all your notes in one place.
-- **Notes**: Pastel-colored floating squares, like real post-its. Yellow by default, four other colors available.
+A simple, lightweight sticky-note app for Linux. Jot things down and never lose a thought.
 
 ## Installation
 
@@ -33,10 +26,10 @@ sudo dnf install python3-gobject gtk4
 sudo pacman -S python-gobject gtk4
 ```
 
-### Run Stick
+### Run Sticky
 
 ```bash
-cd sticky/
+cd /path/to/Sticky
 python3 sticky.py
 ```
 
@@ -49,16 +42,12 @@ Pin Sticky to your dock/sidebar for quick access.
 | Action | How |
 |--------|-----|
 | **New note from manager** | Click the **+** button in the manager window |
-| **New note from anywhere** | Press `Ctrl+Alt+N` (works even when Stick is in the background!) |
 
 ### Managing Notes
 
 - **Open a note**: Click it in the manager list. If it's already open, it jumps to the front.
-- **Close a note**: Click the **X** button on the note's toolbar. The note stays in your list.
-- **Delete a note permanently**: Click the **trash icon** next to the note in the manager list. Instant — no confirmation.
-- **Quit Stick entirely**: Click the **Quit** button in the manager window.
-
-> **Tip**: Closing the manager window just hides it — Sticky keeps running so `Ctrl+Alt+N` always works. Click the dock icon to bring it back.
+- **Close a note**: Click the window's titlebar **X**. The note stays in your list.
+- **Delete a note permanently**: Click the **✕ delete button** next to the note in the manager list. Instant — no confirmation.
 
 ### Formatting Text
 
@@ -73,10 +62,6 @@ Sticky uses simple inline markers. As you type, text renders styled instantly �
 | `/t3 Heading t3/` | **Heading** (medium) |
 | `/t4 Heading t4/` | **Heading** (small heading) |
 
-You can also use keyboard shortcuts while typing:
-- `Ctrl+B` — bold
-- `Ctrl+I` — italic
-- `Ctrl+1` to `Ctrl+4` — title levels 1 through 4
 
 ### Making Lists
 
@@ -101,16 +86,9 @@ Click the **color icon** on the note's toolbar. A dropdown shows five pastel col
 | Pink/Purple | Personal, ideas |
 | Orange/Red | Urgent, important |
 
-### Keeping Notes Visible (Always on Top)
-
-- Click the **pin icon** on the note's toolbar to toggle it on/off.
-- Or press `Ctrl+Alt+P` from anywhere to toggle pin for all open notes.
-
-When pinned, the note stays above other windows — great for reference info while working in another app.
-
 ### Resizing Notes
 
-- **Mouse**: Hold `Ctrl` and drag any corner of the note.
+- **Mouse**: Hold `Ctrl` and drag in the note window to resize it.
 - **Keyboard**: `Ctrl+Plus` increases the note size by a step.
 
 Notes always reopen at the default post-it square size. Custom sizing is temporary (per session).
@@ -121,15 +99,6 @@ All notes are stored as JSON files in the `notes/` folder next to the app. To ba
 
 ## Keyboard Shortcuts Cheat Sheet
 
-### Global (work anywhere)
-
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+Alt+N` | New note |
-| `Ctrl+Alt+P` | Toggle always-on-top |
-
-### While Typing in a Note
-
 | Shortcut | Action |
 |----------|--------|
 | `Ctrl+B` | Bold |
@@ -138,6 +107,8 @@ All notes are stored as JSON files in the `notes/` folder next to the app. To ba
 | `Ctrl+2` | Title level 2 |
 | `Ctrl+3` | Title level 3 |
 | `Ctrl+4` | Title level 4 |
+| `Ctrl+W` | Close the focused note window |
+| `Ctrl+Alt+N` | Create and open a new note while Sticky is running |
 | `Ctrl+Plus` | Enlarge note |
 
 ## Data & Privacy

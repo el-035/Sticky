@@ -1,8 +1,7 @@
 [Desktop Entry]
 Name=Sticky
 Comment=A simple sticky-note app for your desktop
-Exec=/usr/bin/python3 /home/el/sideProjects/postit/sticky.py
-Path=/home/el/sideProjects/postit
+Exec=python3 sticky.py
 Icon=accessories-text-editor
 Terminal=false
 Type=Application

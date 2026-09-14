@@ -11,7 +11,7 @@ A Linux desktop sticky-note application built with GTK 4 + Python. Notes are sto
 - Bullet lists via `- ` (dash + space) at line start, auto-continues on Enter; `- ` marker stays visible (Markdown-style)
 - 5 pastel colors color the entire note window: yellow (default), green, blue, pink/purple, orange/red
 - WYSIWYG formatting markers hidden, text styled immediately
-- System shortcut (Ctrl+Alt+N new note) configured in GNOME Settings runs `python3 sticky.py --new-note`
+- Local shortcut Ctrl+Alt+N creates a new note while Sticky is running
 - Local shortcut Ctrl+W closes a focused note window
 - Always-on-top is handled by the window manager (right-click titlebar → Always on Top); no in-app pin button
 - App quits when the last window is closed (manager or note)
@@ -23,19 +23,25 @@ A Linux desktop sticky-note application built with GTK 4 + Python. Notes are sto
 ```
 postit/
 ├── DESIGN.md          # Full design specification
-├── CLAUDE.md          # This file — project context for Claude Code
-├── sticky.py          # Main application entry point (to be created)
+├── AGENTS.md          # Project instructions and context for Codex
+├── sticky.py          # Main application entry point
+├── note_model.py      # Note data model
+├── note_store.py      # JSON persistence
+├── notes_manager.py   # Manager window
+├── note_window.py     # Floating note windows
+├── wysiwyg_editor.py  # GTK text editor
+├── formatting.py      # Inline formatting engine
+├── css_styles.py      # GTK CSS definitions
 ├── notes/             # Directory where note JSON files are stored
 │   ├── 20260619-143022.json
 │   └── ...
-└── requirements.txt   # Python dependencies (to be created)
+└── requirements.txt   # Dependency notes
 ```
 
 ## Dependencies
 
 - Python 3
 - PyGObject (GTK 4 Python bindings)
-- pycairo (optional; for custom `Gtk.DrawingArea` draw functions)
-- On Ubuntu: `sudo apt install python3-gi gir1.2-gtk-4.0 python3-gi-cairo`
+- On Ubuntu: `sudo apt install python3-gi gir1.2-gtk-4.0`
 
 See DESIGN.md for the complete specification.

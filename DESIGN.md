@@ -6,10 +6,10 @@
 
 ## Core Behavior
 
-- **Manager window**: List view of all notes. Black background, bright green text, monospace font (retro terminal aesthetic).
+- **Manager window**: List view of all notes with a dark gray background, white text, and a monospace font.
 - **Floating notes**: Each note opens as an independent window with a pastel-colored background covering the whole window (toolbar + editor). Monospace font.
-- **App lifecycle**: The app runs only while at least one window (manager or note) is open. Closing the manager window quits the app. Closing the last note window also quits the app. System shortcuts (`python3 sticky.py --new-note`) start the app on demand when needed.
-- **Dock icon**: Added to the Ubuntu dock/sidebar as a favorite app for quick access.
+- **App lifecycle**: The app runs while at least one window (manager or note) is open, and exits when the last window closes. Closing the manager window closes only the manager; any open note windows remain available.
+- **Desktop launcher**: The installer adds a Sticky launcher to the user application menu. Pinning it to a dock or sidebar is a desktop environment setting.
 
 ## Note Storage
 
@@ -94,13 +94,7 @@ All toolbar actions also have keyboard alternatives.
 
 ## Keyboard Shortcuts
 
-### Global (configured in GNOME Settings, works from any app)
-
-| Shortcut | Command | Action |
-|----------|---------|--------|
-| `Ctrl+Alt+N` | `python3 /home/el/sideProjects/postit/sticky.py --new-note` | Create and open a new floating note instantly |
-
-### Local (only when a Stick note window is focused)
+### Local (when a Sticky window is focused)
 
 | Shortcut | Action |
 |----------|--------|
@@ -112,7 +106,8 @@ All toolbar actions also have keyboard alternatives.
 | `Ctrl+4` | Apply `/t4` title |
 | `Ctrl+Plus` | Increase note size by a percentage increment |
 | `Ctrl+W` | Close the focused note window |
-| `Ctrl+drag corner` | Resize note window with mouse |
+| `Ctrl+Alt+N` | Create and open a new note while Sticky is running |
+| `Ctrl+drag` | Resize the note window with the mouse |
 
 ## Manager Window (List View)
 
@@ -122,8 +117,8 @@ All toolbar actions also have keyboard alternatives.
   - Explicit title if set; otherwise the first line of note content; otherwise the creation date + time (e.g., "2026-06-19 14:30:22")
   - Color indicator (small colored dot in the note's color)
   - Delete icon (✕) on the right side — **instant deletion, no confirmation**
-- **"+" button**: Creates a new note (also `Ctrl+Alt+N`)
-- **Window close / X**: Quits the application entirely
+- **"+" button**: Creates a new note (also `Ctrl+Alt+N` while Sticky is running)
+- **Window close / X**: Closes the manager window. The application exits after all note windows are closed as well.
 - **Click on a row**: Opens the note as a floating window. If already open, brings the existing window to the front (no duplicates).
 - **Search/filter/sort**: Not in v1 (future feature).
 - **Grid view**: Not in v1 (future feature).
@@ -131,12 +126,10 @@ All toolbar actions also have keyboard alternatives.
 
 ## Note Window Behavior
 
-- **Default size**: Small square, resembling a physical post-it note.
-- **Resizing**: 
-  - `Ctrl + mouse drag` from any corner
-  - `Ctrl+Plus` increments size by a percentage
+- **Default size**: 320×320 pixels, resembling a physical post-it note.
+- **Resizing**: Hold `Ctrl` while dragging in the note window to change its width and height. `Ctrl+Plus` increments the size by 15%.
 - **Reopening**: Notes always reopen at the default size. Custom sizing is per-session only (does not persist across close/reopen).
-- **Position**: New notes cascade slightly offset so they don't stack exactly on top of each other.
+- **Position**: The application tracks a cascade offset for new notes, but the desktop window manager controls their actual placement.
 - **Always-on-top**: Use the window manager's "Always on Top" option (right-click the titlebar). No in-app pin control.
 - **Close (window titlebar X or Ctrl+W)**: Closes the note window. The note remains in the manager list and can be reopened.
 - **Delete (✕ icon in list)**: Permanently deletes the note and its JSON file. Instant, no confirmation dialog.
