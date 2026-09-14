@@ -13,6 +13,7 @@ class NoteModel:
     title: str = ""
     content: str = ""
     color: str = "yellow"
+    locked: bool = False
     created: str = ""
     modified: str = ""
 
@@ -32,6 +33,7 @@ class NoteModel:
             "title": self.title,
             "content": self.content,
             "color": self.color,
+            "locked": self.locked,
             "created": self.created,
             "modified": self.modified,
         }
@@ -44,6 +46,7 @@ class NoteModel:
             title=data.get("title", ""),
             content=data.get("content", ""),
             color=data.get("color", "yellow"),
+            locked=bool(data.get("locked", False)),
             created=data.get("created", ""),
             modified=data.get("modified", ""),
         )

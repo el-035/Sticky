@@ -47,7 +47,8 @@ Pin Sticky to your dock/sidebar for quick access.
 
 - **Open a note**: Click it in the manager list. If it's already open, it jumps to the front.
 - **Close a note**: Click the window's titlebar **X**. The note stays in your list.
-- **Delete a note permanently**: Click the **✕ delete button** next to the note in the manager list. Instant — no confirmation.
+- **Lock a note**: Click the open lock icon next to a note to protect it from deletion. Click it again to unlock.
+- **Delete a note permanently**: Click the **✕ delete button** next to an unlocked note in the manager list. Instant — no confirmation.
 
 ### Formatting Text
 

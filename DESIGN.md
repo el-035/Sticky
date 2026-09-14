@@ -25,6 +25,7 @@
   "title": "Shopping List",
   "content": "- Milk\n- Bread\n/b Don't forget the bread! b/",
   "color": "yellow",
+  "locked": false,
   "created": "2026-06-19 14:30:22",
   "modified": "2026-06-19 15:12:08"
 }
@@ -36,6 +37,7 @@
 | `title` | Optional explicit note title, shown in the manager list |
 | `content` | Raw note text including formatting markup |
 | `color` | One of: `yellow`, `green`, `blue`, `pink`, `orange` |
+| `locked` | Whether deletion is disabled for this note |
 | `created` | Creation timestamp |
 | `modified` | Last modification timestamp |
 
@@ -115,7 +117,8 @@ All toolbar actions also have keyboard alternatives.
 - **Each list item shows**:
   - Explicit title if set; otherwise the first line of note content; otherwise the creation date + time (e.g., "2026-06-19 14:30:22")
   - Color indicator (small colored dot in the note's color)
-  - Delete icon (✕) on the right side — **instant deletion, no confirmation**
+  - Open/closed lock icon to toggle deletion protection
+  - Delete icon (✕) on the right side — **instant deletion for unlocked notes, no confirmation**
 - **"+" button**: Creates a new note (also `Ctrl+Alt+N` while Sticky is running)
 - **Window close / X**: Closes the manager window. The application exits after all note windows are closed as well.
 - **Click on a row**: Opens the note as a floating window. If already open, brings the existing window to the front (no duplicates).
@@ -131,7 +134,8 @@ All toolbar actions also have keyboard alternatives.
 - **Position**: The application tracks a cascade offset for new notes, but the desktop window manager controls their actual placement.
 - **Always-on-top**: Use the window manager's "Always on Top" option (right-click the titlebar). No in-app pin control.
 - **Close (window titlebar X or Ctrl+W)**: Closes the note window. The note remains in the manager list and can be reopened.
-- **Delete (✕ icon in list)**: Permanently deletes the note and its JSON file. Instant, no confirmation dialog.
+- **Lock (open/closed lock icon in list)**: Toggles deletion protection and persists with the note.
+- **Delete (✕ icon in list)**: Permanently deletes an unlocked note and its JSON file. Locked notes cannot be deleted.
 
 ## Future Features (not in v1)
 

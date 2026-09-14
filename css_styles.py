@@ -44,6 +44,24 @@ window.manager {
     color: #a0a0a0;
 }
 
+.manager .lock-button {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 14px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.manager .lock-button:hover {
+    color: #f0f0f0;
+    background-color: #404040;
+}
+
+.manager .lock-button.is-locked {
+    color: #f0c674;
+}
+
 .manager .delete-button {
     background: none;
     border: none;

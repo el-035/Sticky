@@ -28,6 +28,7 @@ class NoteRow(GObject.Object):
     display_title = GObject.Property(type=str)
     color = GObject.Property(type=str)
     created = GObject.Property(type=str)
+    locked = GObject.Property(type=bool, default=False)
 
     def __init__(self, note: NoteModel):
         super().__init__()
@@ -35,6 +36,7 @@ class NoteRow(GObject.Object):
         self.display_title = note.display_title
         self.color = note.color
         self.created = note.created
+        self.locked = note.locked
         self._title = note.title
         self._content = note.content
 
@@ -170,6 +172,13 @@ class ManagerWindow(Gtk.ApplicationWindow):
         title_label.set_can_target(False)
         row_box.append(title_label)
 
+        # Lock button — toggles deletion protection without opening the note.
+        lock_btn = Gtk.Button()
+        lock_btn.add_css_class("lock-button")
+        lock_btn.set_can_target(True)
+        lock_btn.connect("clicked", self._on_lock_clicked, list_item)
+        row_box.append(lock_btn)
+
         # Delete button — pass the list_item so we can read the current note on click
         delete_btn = Gtk.Button(label="✕")
         delete_btn.add_css_class("delete-button")
@@ -192,6 +201,7 @@ class ManagerWindow(Gtk.ApplicationWindow):
 
         color_dot = row_box.get_first_child()
         title_label = color_dot.get_next_sibling()
+        lock_btn = title_label.get_next_sibling()
 
         note_id = note_row.note_id
         self._widget_note_ids[id(color_dot)] = note_id
@@ -206,6 +216,7 @@ class ManagerWindow(Gtk.ApplicationWindow):
         color_dot.set_markup(
             f'<span foreground="{color_info["hex"]}">●</span>'
         )
+        self._update_lock_button(lock_btn, note_row)
 
     def _on_list_item_unbind(self, factory, list_item):
         """Unbind data (clean up references)."""
@@ -214,7 +225,8 @@ class ManagerWindow(Gtk.ApplicationWindow):
             return
         color_dot = row_box.get_first_child()
         title_label = color_dot.get_next_sibling()
-        for child in (color_dot, title_label):
+        lock_btn = title_label.get_next_sibling()
+        for child in (color_dot, title_label, lock_btn):
             if child:
                 self._widget_note_ids.pop(id(child), None)
 
@@ -248,6 +260,33 @@ class ManagerWindow(Gtk.ApplicationWindow):
         app = self.get_application()
         app.on_note_activated(note_id)
 
+    def _update_lock_button(self, button, note_row):
+        """Reflect a note's lock state with a simple open/closed icon."""
+        icon_name = "changes-prevent-symbolic" if note_row.locked else "changes-allow-symbolic"
+        icon = Gtk.Image.new_from_icon_name(icon_name)
+        icon.set_pixel_size(16)
+        button.set_child(icon)
+        if note_row.locked:
+            button.set_tooltip_text("Unlock note")
+            button.add_css_class("is-locked")
+        else:
+            button.set_tooltip_text("Lock note to prevent deletion")
+            button.remove_css_class("is-locked")
+
+    def _on_lock_clicked(self, button, list_item):
+        """Toggle deletion protection for a note."""
+        item = list_item.get_item()
+        if item is None:
+            return
+        app = self.get_application()
+        note = app.note_store.get(item.note_id) if app else None
+        if note is None:
+            return
+        note.locked = not note.locked
+        app.note_store.save(note)
+        item.locked = note.locked
+        self._update_lock_button(button, item)
+
     def _on_delete_clicked(self, button, list_item):
         """Handle click on a delete button — instant delete, no confirmation."""
         item = list_item.get_item()
@@ -255,6 +294,8 @@ class ManagerWindow(Gtk.ApplicationWindow):
             return
 
         note_id = item.note_id
+        if item.locked:
+            return
         app = self.get_application()
         app.on_note_deleted(note_id)
 

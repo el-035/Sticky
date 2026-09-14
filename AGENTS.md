@@ -16,7 +16,8 @@ A Linux desktop sticky-note application built with GTK 4 + Python. Notes are sto
 - Always-on-top is handled by the window manager (right-click titlebar → Always on Top); no in-app pin button
 - App quits when the last window is closed (manager or note)
 - Notes always reopen at default post-it square size
-- Delete is instant, no confirmation
+- Delete is instant for unlocked notes, no confirmation
+- Notes can be locked from the manager to prevent accidental deletion
 
 ## Project Structure
 

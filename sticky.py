@@ -176,6 +176,10 @@ class StickyApp(Gtk.Application):
 
         Closes the note window if open, then removes the JSON file.
         """
+        note = self.note_store.get(note_id)
+        if note is not None and note.locked:
+            return
+
         if note_id in self.open_windows:
             self.open_windows[note_id].destroy()
             del self.open_windows[note_id]
